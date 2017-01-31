@@ -16,12 +16,12 @@ To use this script, you will need:
 
 * First, install Ruby, version 2.2.1 or higher.  For information on installing ruby on Windows, Mac, and Linux, visit [Installing Ruby (source:ruby-lang.org)](https://www.ruby-lang.org/en/documentation/installation/)
 * Next, the `twitter` and `rubyXL` gems are required for interacting with the Twitter API and for creating spreadsheets, respectively.   To install these, open up a terminal/command prompt and issue the following commands:
-  ```bash
+  ```
   gem install twitter
   gem install rubyXL
   ```
 * Finally, make sure that you have Twitter API credentials set up.  For the application to use your API access credentials, they must be defined as environment variables with the following names: 
-  ```bash
+  ```
   TWITTER_CONSUMER_KEY
   TWITTER_CONSUMER_SECRET
   TWITTER_ACCESS_TOKEN
