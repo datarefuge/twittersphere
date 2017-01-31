@@ -1,0 +1,5 @@
+.idea
+.DS_Store
+*.xlsx
+scripts/*.xlsx
+scripts/list
