@@ -2,7 +2,6 @@
 
 require 'twitter'
 require 'pp'
-require 'pry'
 require 'rubyXL'
 
 client = Twitter::REST::Client.new do |config|
