@@ -55,6 +55,12 @@ TWEET_HEADERS = {:user => 'Username',
 
 TWEET_EXPLODERS = [:user, :uris, :urls, :user_mentions, :hashtags, :media, :quoted_status, :retweeted_status]
 
+TWEET_STRINGIFY_FIELDS = [:id,
+                          :in_reply_to_screen_name,
+                          :in_reply_to_user_id,
+                          :in_reply_to_status_id,
+                          :in_reply_to_tweet_id ]
+
 USER_HEADERS = [:id, :name, :screen_name, :description,
                 :location, :url, :contributors_enabled, :created_at,
                 :default_profile_image, :default_profile, :favourites_count, :followers_count,
@@ -115,7 +121,7 @@ end
 
 def explode(worksheet, tweet, y_index)
   TWEET_HEADERS.each_with_index do |(key, value), x_index|
-    worksheet.add_cell(y_index, x_index, TWEET_EXPLODERS.include?(key) ? exploded_value(tweet, key) : (tweet.send(key).to_s == '[]' ? '' : tweet.send(key)) )
+    worksheet.add_cell(y_index, x_index, TWEET_EXPLODERS.include?(key) ? exploded_value(tweet, key) : typed_value(tweet, key))
   end
 end
 
@@ -128,6 +134,15 @@ def exploded_value(tweet, key)
   return pp_exploded_retweet(tweet) if key == :retweeted_status
   return pp_array(tweet.hashtags) if key == :hashtags
   return pp_attrs_hash(tweet.user_mentions) if key == :user_mentions
+end
+
+def typed_value(tweet, key)
+  val = tweet.send(key)
+  if val.to_s == '[]'
+    ''
+  else
+    TWEET_STRINGIFY_FIELDS.member?(key) ? val.to_s : val
+  end
 end
 
 def workbook.add_user_worksheet(user)
