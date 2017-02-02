@@ -167,7 +167,7 @@ end
 
 
 def pp_exploded_retweet(tweet)
-  return pp(tweet.urls).to_s
+  return pp(tweet.attrs[:entities][:urls]).to_s
 end
 
 def header_label(header_symbol)
